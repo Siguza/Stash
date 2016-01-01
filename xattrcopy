@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$1" = '' ] || [ "$2" = '' ]; then
+    echo "Usage: $0 <source file> <target file>";
+    exit 1;
+fi;
+
+xattr "$1" | while read key; do
+    xattr -wx "$key" "$(xattr -px "$key" "$1")" "$2";
+done;
