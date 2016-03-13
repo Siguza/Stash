@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SZS-Plus
 // @namespace    siguza.szs.plus
-// @version      1.0
+// @version      1.1
 // @description  Just my own style...
 // @author       Siguza
 // @homepage     https://github.com/Siguza/Stash/UserScripts
@@ -31,11 +31,14 @@ function run()
     }
     if(location.pathname == '/login.php')
     {
-        document.getElementsByName('code')[0].focus();
+        var code = document.getElementsByName('code')[0];
+        code.setAttribute('autocomplete', 'off');
+        code.focus();
     }
     var code = document.getElementsByName('zufallscode')[0];
     if(code)
     {
+        code.setAttribute('autocomplete', 'off');
         code.focus();
     }
     Array.prototype.forEach.call(document.querySelectorAll('a'), function(a)
