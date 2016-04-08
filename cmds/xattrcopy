@@ -1,7 +1,8 @@
 #!/bin/bash
 
 if [ "$1" = '' ] || [ "$2" = '' ]; then
-    echo "Usage: $0 <source file> <target file>";
+    echo 'Usage:';
+    echo "    $(basename "$0") <source file> <target file>";
     exit 1;
 fi;
 

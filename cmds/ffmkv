@@ -1,0 +1,81 @@
+#!/bin/bash
+set -e;
+
+rename='true';
+threads='6';
+flags='';
+vcodec='';
+res='';
+
+while [ "$#" -gt '0' ] && [ "${1:0:1}" == '-' ]; do
+    case "$1" in
+        '-c'|'--copy')
+            vcodec='copy';
+            ;;
+        '-d'|'--down')
+            res='360';
+            ;;
+        '-h'|'--hevc')
+            vcodec='libx265';
+            ;;
+        '-n'|'--nores')
+            rename='false';
+            ;;
+        '-s'|'--slow')
+            flags="$flags -preset veryslow";
+            ;;
+        '-t'*)
+            threads="${1:2}";
+            ;;
+        *)
+            echo "Unrecognised option: $1";
+            exit 1;
+            ;;
+    esac;
+    shift;
+done;
+if ! [ -z "$vcodec" ]; then
+    flags="$flags -vcodec $vcodec";
+fi;
+if ! [ -z "$res" ]; then
+    flags="$flags -vf scale=-1:$res";
+fi;
+
+if [ "$#" == 0 ]; then
+    echo 'Usage:';
+    echo "    $(basename "$0") [options] file1 [file2 [...]]";
+    echo 'Options:';
+    echo '    -c --copy   Copy video codec';
+    echo '    -d --down   Scale down to 360p';
+    echo '    -h --hevc   HEVC';
+    echo "    -n --nores  Don't put resolution in file name";
+    echo '    -s --slow   Slower, but better compression';
+    echo '    -t<X>       Use X threads';
+    exit 1;
+fi;
+
+while [ "$1" != '' ]; do
+    if "$rename"; then
+        if [ -z "$res" ]; then
+            if hash ffratio; then
+                res="$(ffratio "$1" | sed -E 's/^[0-9]+x([0-9]+)$/\1/g')";
+            else
+                res="$(ffprobe "$1" 2>&1 | grep -E 'Video:.* [0-9]+x[0-9]+[ ,]' | head -1 | sed -E 's/^.* [0-9]+x([0-9]+)[ ,].*$/\1/g';)";
+            fi;
+            case "$res" in
+                ''|*[!0-9]*)
+                    echo "Cannot determine resolution of $1";
+                    exit 1;
+                    ;;
+            esac;
+        fi;
+        target="$(echo "$1" | sed -E 's/\.[^\.]+$/.'"$res"'.mkv/g')";
+    else
+        target="$(echo "$1" | sed -E 's/\.[^\.]+$/.mkv/g')";
+    fi;
+    ffmpeg -i "$1" -sn -threads "$threads" $flags "$target";
+    if hash xattrcopy 2>/dev/null; then
+        xattrcopy "$1" "$target";
+    fi;
+    shift;
+done;
