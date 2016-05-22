@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100">
+    <path d="M 0 20
+             A 20 20 0 0 1 20 0
+             L 80 0
+             A 20 20 0 0 1 100 20
+             L 100 80
+             A 20 20 0 0 1 80 100
+             L 20 100
+             A 20 20 0 0 1 0 80
+             L 0 20
+             M 10 20
+             L 10 80
+             A 10 10 0 0 0 20 90
+             L 80 90
+             A 10 10 0 0 0 90 80
+             L 90 20
+             A 10 10 0 0 0 80 10
+             L 20 10
+             A 10 10 0 0 0 10 20"
+          fill="#D00" />
+    <line x1="32.5" y1="32.5" x2="67.5" y2="67.5" stroke="#D00" stroke-width="10" stroke-linecap="round" />
+    <line x1="32.5" y1="67.5" x2="67.5" y2="32.5" stroke="#D00" stroke-width="10" stroke-linecap="round" />
+</svg>
