@@ -24,13 +24,4 @@ Everything in this repository is placed in the public domain.
     (OS X) Copy all extended attributes from one file to another.
 * `dumpstyle.js`  
   Recursively dump a DOM node's applied styles.
-* `UserScripts`  
-  Just some random userscripts I wrote.
-  * `NoFuckAdBlock.user.js`  
-    Breaks [FuckAdBlock](https://github.com/sitexw/FuckAdBlock).
-  * `Slim-MOXiI-Forum.user.js`  
-    Makes the [MOXiI Forum](http://www.newosxbook.com/forum/index.php) less wide.
-  * `SZS-Plus.user.js`  
-    Various improvements to [an old German browser game](http://szs.looki.de/).
-  * `WhatsCrapp.user.js`  
-    Hides annoying stuff on WhatsApp Web.
+* ~~`UserScripts`~~ Moved [here](https://github.com/Siguza/UserScripts/).
