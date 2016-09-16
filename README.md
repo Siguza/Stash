@@ -20,6 +20,9 @@ Everything in this repository is placed in the public domain.
   * `ffratio` (bash script)  
     Prints a video file's resolution like `1920x1080`.  
     Requires: [ffprobe](https://ffmpeg.org/ffprobe.html)
+  * `strerror.c` (C source file)  
+    Get description for an error code.  
+    Simply calls `strerror(3)` with the first command line argument.
   * `xattrcopy` (bash script)  
     (OS X) Copy all extended attributes from one file to another.
 * `dumpstyle.js`  
