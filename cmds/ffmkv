@@ -6,6 +6,7 @@ threads='6';
 flags='';
 vcodec='';
 res='';
+out='';
 
 while [ "$#" -gt '0' ] && [ "${1:0:1}" == '-' ]; do
     case "$1" in
@@ -20,6 +21,12 @@ while [ "$#" -gt '0' ] && [ "${1:0:1}" == '-' ]; do
             ;;
         '-n'|'--nores')
             rename='false';
+            ;;
+        '-o'*)
+            out="${1:2}";
+            ;;
+        '-r'*)
+            res="${1:2}";
             ;;
         '-s'|'--slow')
             flags="$flags -preset veryslow";
@@ -38,7 +45,7 @@ if ! [ -z "$vcodec" ]; then
     flags="$flags -vcodec $vcodec";
 fi;
 if ! [ -z "$res" ]; then
-    flags="$flags -vf scale=-1:$res";
+    flags="$flags -vf scale=-2:$res";
 fi;
 
 if [ "$#" == 0 ]; then
@@ -49,6 +56,8 @@ if [ "$#" == 0 ]; then
     echo '    -d --down   Scale down to 360p';
     echo '    -h --hevc   HEVC';
     echo "    -n --nores  Don't put resolution in file name";
+    echo '    -o<path>    Write to path/';
+    echo '    -r<res>     Scale to resolution';
     echo '    -s --slow   Slower, but better compression';
     echo '    -t<X>       Use X threads';
     exit 1;
@@ -72,6 +81,9 @@ while [ "$1" != '' ]; do
         target="$(echo "$1" | sed -E 's/\.[^\.]+$/.'"$res"'.mkv/g')";
     else
         target="$(echo "$1" | sed -E 's/\.[^\.]+$/.mkv/g')";
+    fi;
+    if ! [ -z "$out" ]; then
+        target="$out/$(basename "$target")";
     fi;
     ffmpeg -i "$1" -sn -threads "$threads" $flags "$target";
     if hash xattrcopy 2>/dev/null; then
