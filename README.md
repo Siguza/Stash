@@ -18,8 +18,10 @@ Everything in this repository is placed in the public domain.
     Supports (but doesn't require) `xattrcopy`.  
     Requires: [ffmpeg](https://ffmpeg.org/)
   * `ffratio` (bash script)  
-    Prints a video file's resolution like `1920x1080`.  
+    Prints a video file's resolution, e.g. `1920x1080`.  
     Requires: [ffprobe](https://ffmpeg.org/ffprobe.html)
+  * `rand.c` (C source file)  
+    Generates (true) random numbers or strings.  
   * `strerror.c` (C source file)  
     Get description for an error code.  
     Simply calls `strerror(3)` with the first command line argument.
