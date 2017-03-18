@@ -66,12 +66,16 @@ shuf()
 }
 hexswap()
 {
-    s="$1";
+    local s='';
+    while [ $# -gt 0 ]; do
+        s="$s$1";
+        shift;
+    done;
     if [ "${s:0:2}" = '0x' ]; then
         s="${s:2}";
     fi;
-    r='';
-    i=${#s};
+    local r='';
+    local i=${#s};
     while [ $i -gt 0 ]; do
         i=$((i-2));
         if [ $i -lt 0 ]; then
@@ -80,7 +84,7 @@ hexswap()
             r="${r}${s:$i:2}";
         fi;
     done;
-    echo "$r";
+    echo "$r" | tr '[:upper:]' '[:lower:]';
 }
 xscp()
 {
