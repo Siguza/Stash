@@ -67,18 +67,20 @@ while [ "$1" != '' ]; do
     if "$rename"; then
         if [ -z "$res" ]; then
             if hash ffratio; then
-                res="$(ffratio "$1" | sed -E 's/^[0-9]+x([0-9]+)$/\1/g')";
+                r="$(ffratio "$1" | sed -E 's/^[0-9]+x([0-9]+)$/\1/g')";
             else
-                res="$(ffprobe "$1" 2>&1 | grep -E 'Video:.* [0-9]+x[0-9]+[ ,]' | head -1 | sed -E 's/^.* [0-9]+x([0-9]+)[ ,].*$/\1/g';)";
+                r="$(ffprobe "$1" 2>&1 | grep -E 'Video:.* [0-9]+x[0-9]+[ ,]' | head -1 | sed -E 's/^.* [0-9]+x([0-9]+)[ ,].*$/\1/g';)";
             fi;
-            case "$res" in
+            case "$r" in
                 ''|*[!0-9]*)
                     echo "Cannot determine resolution of $1";
                     exit 1;
                     ;;
             esac;
+        else
+            r="$res";
         fi;
-        target="$(echo "$1" | sed -E 's/\.[^\.]+$/.'"$res"'.mkv/g')";
+        target="$(echo "$1" | sed -E 's/\.[^\.]+$/.'"$r"'.mkv/g')";
     else
         target="$(echo "$1" | sed -E 's/\.[^\.]+$/.mkv/g')";
     fi;
