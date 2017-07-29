@@ -27,7 +27,7 @@ int main(int argc, const char **argv)
         fputs("[!] Too few arguments.\n", stderr);
         return 1;
     }
-    int i = atoi(argv[off]);
+    int i = (int)strtoul(argv[off], NULL, 0);
     const char *s =
 #ifndef NO_MACH
     mach ? mach_error_string(i) :
