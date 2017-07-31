@@ -92,6 +92,7 @@ xscp()
 }
 
 # iOS
+SDK='/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk';
 iSDK='/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk';
 alias igcc='xcrun -sdk iphoneos gcc -Wall -arch armv7 -arch arm64';
 alias igcc64='xcrun -sdk iphoneos gcc -Wall -arch arm64';
