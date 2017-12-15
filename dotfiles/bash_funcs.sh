@@ -4,7 +4,7 @@ alias js='osascript -l JavaScript';
 alias asn1dump='openssl asn1parse -i -inform DER -in';
 mkcd()
 {
-    mkdir "$1";
+    mkdir -p "$1";
     cd "$1";
 }
 private()
