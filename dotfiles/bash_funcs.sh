@@ -113,3 +113,24 @@ payday()
     fi;
     pbzx <payload >payload.ota.xz && unxz -v payload.ota.xz;
 }
+j2r2()
+{
+    if [ $# -lt 1 ]; then
+        echo "Usage: j2r2 file [file2 [...]]"
+        return 1;
+    fi;
+    while [ $# -gt 0 ]; do
+        local infile="$1";
+        shift;
+        if ! [ -e "$infile" ]; then
+            echo -e '\x1b[1:93mFile does not exist: '"$infile"'\x1b[0m';
+            continue;
+        fi;
+        local outfile="$(sed -E 's#^(.+)\.kext.*$#\1.r2#g' <<<"$infile")";
+        if [ -e "$outfile" ]; then
+            echo -e '\x1b[1:93mFile exists already: '"$outfile"'\x1b[0m';
+        fi;
+        echo 'fs imports' > "$outfile";
+        sed -E 's#^([0-9a-f]+):(.+)\.stub$#f sym.imp.\2 0 0x\1#' < "$infile" >> "$outfile";
+    done;
+}
