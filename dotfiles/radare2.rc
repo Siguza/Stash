@@ -1,4 +1,4 @@
-e asm.lineswidth    = 32
+e asm.lines.width   = 32
 e rop.len           = 10
 e bin.maxstrbuf     = 0x100000000
 e asm.xrefs         = false
