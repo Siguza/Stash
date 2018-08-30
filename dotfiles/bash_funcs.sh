@@ -90,6 +90,30 @@ xscp()
 {
     ssh "$2" "cat > $1" < "$1";
 }
+sizels()
+{
+    if [ $# -ge 1 ]; then
+        dir="$1";
+    else
+        dir='.';
+    fi;
+    find "$dir" -type f -print0 | xargs -0 stat -f '%12z %N' | sort;
+}
+ffrip()
+{
+    if [ $# -ge 2 ]; then
+        o="$2";
+    else
+        o='out.mp4';
+    fi;
+    ffmpeg -i "$1" -c copy -bsf:a aac_adtstoasc "$o";
+}
+ffconcat()
+{
+    out="$1";
+    shift;
+    ffmpeg -f concat -safe 0 -i <(for x in "$@"; do (cd "$(dirname "$x")" && echo "file '$PWD/$(basename "$x")'"); done) -c copy "$out";
+}
 
 # iOS
 SDK='/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk';
@@ -103,7 +127,15 @@ alias iclang++='xcrun -sdk iphoneos g++ -Wall';
 alias xcbuild='xcodebuild clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO';
 isign()
 {
-    codesign -s - --entitlements "$2" "$1";
+    f=('-s' '-');
+    if [ $# -ge 2 ]; then
+        f+=('--entitlements' "$2");
+    fi;
+    codesign "${f[@]}" "$1";
+}
+ibuild()
+{
+    xcodebuild clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphoneos;
 }
 payday()
 {

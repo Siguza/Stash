@@ -3,21 +3,24 @@ set -e;
 
 rename='true';
 threads='6';
-flags='';
-vcodec='';
-res='';
+inflags=();
+outflags=();
+decoder='';
+encoder='h264_videotoolbox';
 out='';
+res='';
 
 while [ "$#" -gt '0' ] && [ "${1:0:1}" == '-' ]; do
     case "$1" in
         '-c'|'--copy')
-            vcodec='copy';
+            encoder='copy';
             ;;
         '-d'|'--down')
             res='360';
             ;;
         '-h'|'--hevc')
-            vcodec='libx265';
+#            encoder='hevc_videotoolbox';
+            encoder='libx265';
             ;;
         '-n'|'--nores')
             rename='false';
@@ -29,7 +32,7 @@ while [ "$#" -gt '0' ] && [ "${1:0:1}" == '-' ]; do
             res="${1:2}";
             ;;
         '-s'|'--slow')
-            flags="$flags -preset veryslow";
+            outflags+=('-preset' 'veryslow');
             ;;
         '-t'*)
             threads="${1:2}";
@@ -41,11 +44,14 @@ while [ "$#" -gt '0' ] && [ "${1:0:1}" == '-' ]; do
     esac;
     shift;
 done;
-if ! [ -z "$vcodec" ]; then
-    flags="$flags -vcodec $vcodec";
+if ! [ -z "$decoder" ]; then
+    inflags+=('-c:v' "$decoder");
+fi;
+if ! [ -z "$encoder" ]; then
+    outflags+=('-c:v' "$encoder");
 fi;
 if ! [ -z "$res" ]; then
-    flags="$flags -vf scale=-2:$res";
+    outflags+=('-vf' "scale=-2:$res");
 fi;
 
 if [ "$#" == 0 ]; then
@@ -66,7 +72,7 @@ fi;
 while [ "$1" != '' ]; do
     if "$rename"; then
         if [ -z "$res" ]; then
-            if hash ffratio; then
+            if hash ffratio 2>/dev/null; then
                 r="$(ffratio "$1" | sed -E 's/^[0-9]+x([0-9]+)$/\1/g')";
             else
                 r="$(ffprobe "$1" 2>&1 | grep -E 'Video:.* [0-9]+x[0-9]+[ ,]' | head -1 | sed -E 's/^.* [0-9]+x([0-9]+)[ ,].*$/\1/g';)";
@@ -87,7 +93,7 @@ while [ "$1" != '' ]; do
     if ! [ -z "$out" ]; then
         target="$out/$(basename "$target")";
     fi;
-    ffmpeg -i "$1" -sn -threads "$threads" $flags "$target";
+    ffmpeg "${inflags[@]}" -i "$1" -sn -threads "$threads" "${outflags[@]}" "$target";
     if hash xattrcopy 2>/dev/null; then
         xattrcopy "$1" "$target";
     fi;
