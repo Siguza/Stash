@@ -166,3 +166,11 @@ j2r2()
         sed -E 's#^([0-9a-f]+):(.+)\.stub$#f sym.imp.\2 0 0x\1#' < "$infile" >> "$outfile";
     done;
 }
+panicparse()
+{
+    if [ $# -lt 1 ]; then
+        echo 'Usage: parsepanic file';
+        return 1;
+    fi;
+    osascript -l JavaScript <<<"JSON.parse('$(tail -n +2 "$1" | tr '\n' ' ' | sed -E 's/\\/\\\\/g')')['panicString']";
+}
