@@ -120,8 +120,10 @@ SDK='/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Develo
 iSDK='/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk';
 alias igcc='xcrun -sdk iphoneos gcc -Wall -arch armv7 -arch arm64';
 alias igcc64='xcrun -sdk iphoneos gcc -Wall -arch arm64';
+alias igcc64e='xcrun -sdk iphoneos gcc -Wall -arch arm64e';
 alias ig++='xcrun -sdk iphoneos g++ -Wall -arch armv7 -arch arm64';
 alias ig++64='xcrun -sdk iphoneos g++ -Wall -arch arm64';
+alias ig++64e='xcrun -sdk iphoneos g++ -Wall -arch arm64e';
 alias iclang='xcrun -sdk iphoneos gcc -Wall';
 alias iclang++='xcrun -sdk iphoneos g++ -Wall';
 alias xcbuild='xcodebuild clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO';
