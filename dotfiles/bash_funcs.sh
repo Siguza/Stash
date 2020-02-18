@@ -174,5 +174,5 @@ panicparse()
         echo 'Usage: parsepanic file';
         return 1;
     fi;
-    osascript -l JavaScript <<<"JSON.parse('$(tail -n +2 "$1" | tr '\n' ' ' | sed -E 's/\\/\\\\/g')')['panicString']";
+    osascript -l JavaScript <<<"s=JSON.parse('$(tail -n +2 "$1" | tr '\n' ' ' | sed -E 's/\\/\\\\/g')');s['panicString']||s['macOSPanicString']";
 }
