@@ -11,3 +11,4 @@ e asm.comments      = false
 (gadget, /x e00310aae00310aae00310aae00310aae00310aae00310aae00310aae00310aa00023fd6fd7b40a9:f0fff0fff0fff0fff0fff0fff0fff0fff0fff0fff0fff0fff0fff0fff0fff0ff1ffeffffff7fc0ff)
 (aes, /x e0030e3200000094f00300aae0030d3200000094:ffffffff000000fcf0ffffffffffffff000000fc)
 (recfg, /x e007003200000094e007003200000094e007003200000094:ffffffff000000fcffffffff000000fcffffffff000000fc)
+(rvbar, /x 00d07592000040b2:e0ffffff00fcffff)
