@@ -4,8 +4,7 @@ alias js='osascript -l JavaScript';
 alias asn1dump='openssl asn1parse -i -inform DER -in';
 mkcd()
 {
-    mkdir -p "$1";
-    cd "$1";
+    mkdir -p "$1" && cd "$1";
 }
 private()
 {
@@ -106,7 +105,7 @@ ffrip()
     else
         o='out.mp4';
     fi;
-    ffmpeg -i "$1" -c copy -bsf:a aac_adtstoasc "$o";
+    ffmpeg -protocol_whitelist file,http,https,tcp,tls,crypto -i "$1" -c copy -bsf:a aac_adtstoasc "$o";
 }
 ffconcat()
 {
