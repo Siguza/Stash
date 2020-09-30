@@ -175,3 +175,11 @@ panicparse()
     fi;
     osascript -l JavaScript <<<"s=JSON.parse('$(tail -n +2 "$1" | tr '\n' ' ' | sed -E 's/\\/\\\\/g')');s['panicString']||s['macOSPanicString']";
 }
+movk()
+{
+    if [ $# -lt 1 ]; then
+        echo 'Usage: movk 0x...';
+        return 1;
+    fi;
+    printf '/x %s:e0ffffff\n' "$(printf '%08x' "$((0xF2E00000 | ($1 << 5)))" | sed -E 's/^(..)(..)(..)(..)$/\4\3\2\1/')";
+}
