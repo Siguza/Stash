@@ -2,6 +2,22 @@
 alias d='cd';
 alias js='osascript -l JavaScript';
 alias asn1dump='openssl asn1parse -i -inform DER -in';
+ls-()
+{
+    ls -"$@";
+}
+ca_check()
+{
+    if (($# != 2)) && (($# != 3)); then
+        echo "Usage: $0 ca.der [intermediate.der] leaf.der";
+        return 1;
+    fi;
+    if (($# == 3)); then
+        openssl verify -purpose any -ignore_critical -CAfile <(openssl x509 -in "$1" -inform der -outform pem) -untrusted <(openssl x509 -in "$2" -inform der -outform pem) <(openssl x509 -in "$3" -inform der -outform pem);
+    else
+        openssl verify -purpose any -ignore_critical -CAfile <(openssl x509 -in "$1" -inform der -outform pem) <(openssl x509 -in "$2" -inform der -outform pem);
+    fi;
+}
 mkcd()
 {
     mkdir -p "$1" && cd "$1";
@@ -177,9 +193,23 @@ panicparse()
 }
 movk()
 {
-    if [ $# -lt 1 ]; then
+    if [ $# -ne 1 ]; then
         echo 'Usage: movk 0x...';
         return 1;
     fi;
     printf '/x %s:e0ffffff\n' "$(printf '%08x' "$((0xF2E00000 | ($1 << 5)))" | sed -E 's/^(..)(..)(..)(..)$/\4\3\2\1/')";
+}
+dart()
+{
+    if [ $# -ne 1 ]; then
+        echo 'Usage: dart [dtre]';
+        return 1;
+    fi;
+    dt "$1" /device-tree/defaults pmap-io-ranges |
+    cut -c 34-81 |
+    xxd -r -p |
+    xxd -p -c 24 -e -g8 |
+    cut -c 11- |
+    sed -E 's/.{8}(.{8})  .{20}(.)(.)(.)(.)$/\1 \5\4\3\2/g' |
+    sort;
 }
