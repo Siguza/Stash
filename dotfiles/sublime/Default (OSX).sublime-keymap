@@ -1,0 +1,4 @@
+[
+    { "keys": ["ctrl+tab"], "command": "next_os_tab" },
+    { "keys": ["ctrl+shift+tab"], "command": "prev_os_tab" },
+]

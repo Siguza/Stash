@@ -1,0 +1,190 @@
+// Documentation at https://www.sublimetext.com/docs/color_schemes.html
+{
+    "variables":
+    {
+        "dark":     "hsl(210,  10%,  12%)",
+        "light":    "hsl(0,     0%,  80%)",
+        "black":    "hsl(0,     0%,   0%)",
+        "white":    "hsl(0,     0%, 100%)",
+        "ice":      "hsl(211,  35%,  75%)",
+        "beige":    "hsl(30,  100%,  80%)",
+        "red":      "hsl(0,   100%,  50%)",
+        "orange":   "hsl(30,  100%,  50%)",
+        "yellow":   "hsl(60,  100%,  50%)",
+        "eggshell": "hsl(60,  100%,  85%)",
+        "moss":     "hsl(120, 100%,  30%)",
+        "green":    "hsl(120, 100%,  40%)",
+        "lime":     "hsl(120, 100%,  65%)",
+        "blue":     "hsl(208, 100%,  60%)",
+        "aqua":     "hsl(208, 100%,  75%)",
+        "cyan":     "hsl(180, 100%,  45%)",
+        "purple":   "hsl(270, 100%,  40%)",
+        "violet":   "hsl(300, 100%,  50%)",
+        "pink":     "hsl(300, 100%,  75%)",
+    },
+    "globals":
+    {
+        "background": "var(dark)",
+        "foreground": "var(light)",
+        "invisibles": "color(var(light) alpha(0.2))",
+        "caret": "var(light)",
+        "line_highlight": "hsl(0, 0%, 20%)",
+
+        //"misspelling"
+        //"fold_marker"
+        //"minimap_border"
+        //"accent"
+
+        //"popup_css"
+        //"phantom_css"
+        //"sheet_css"
+
+        //"gutter"
+        //"gutter_foreground"
+        //"gutter_foreground_highlight"
+
+        //"line_diff_width"
+        //"line_diff_added"
+        //"line_diff_modified"
+        //"line_diff_deleted"
+
+        "selection": "hsl(0, 0%, 20%)",
+        //"selection_foreground": "",
+        "selection_border": "var(light)",
+        "selection_border_width": "1",
+        "inactive_selection": "hsl(0, 0%, 20%)",
+        "inactive_selection_border": "var(light)",
+        //"inactive_selection_foreground": "",
+        "selection_corner_style": "square",
+        //"selection_corner_radius": "0",
+
+        "highlight": "var(light)",
+        //"find_highlight": "",
+        //"find_highlight_foreground"
+        //"scroll_highlight"
+        //"scroll_selected_highlight"
+
+        //"rulers"
+
+        //"guide"
+        //"active_guide"
+        //"stack_guide"
+
+        "brackets_options": "underline",
+        //"brackets_foreground": "",
+        "bracket_contents_options": "",
+        //"bracket_contents_foreground": "",
+
+        //"tags_options"
+        //"tags_foreground"
+
+        //"shadow"
+        //"shadow_width"
+
+
+
+        //"find_highlight": "var(purple)",
+        //"find_highlight_foreground": "var(white)",
+        //"find_highlight": "",
+        //"find_highlight_foreground": "",
+    },
+    "rules":
+    [
+        // Comment
+        {
+            "scope": "comment",
+            "foreground": "var(moss)",
+        },
+        // String
+        {
+            "scope": "string",
+            "foreground": "var(blue)",
+            "font_style": "bold",
+        },
+        {
+            "scope": "punctuation.definition.string, storage.modifier.array",
+            "foreground": "var(aqua)",
+        },
+        {
+            "scope": "constant.character.escape",
+            "foreground": "var(orange)",
+        },
+        // Keyword
+        {
+            "scope": "keyword",
+            "foreground": "var(violet)",
+        },
+        {
+            "scope": "keyword.control, keyword.other.storage, storage.modifier, entity.name.tag, punctuation.definition.tag",
+            "foreground": "var(aqua)",
+        },
+        // Operator
+        {
+            "scope": "keyword.operator.arithmetic, keyword.operator.logical",
+            "foreground": "var(yellow)",
+        },
+        {
+            "scope": "storage.modifier.array",
+            "foreground": "var(light)",
+        },
+        // Preprocessor
+        {
+            "scope": "meta.preprocessor keyword.control",
+            "foreground": "var(ice)",
+        },
+        // Type
+        {
+            "scope": "storage.type",
+            "foreground": "var(green)",
+            "font_style": "bold",
+        },
+        /*{
+            "scope": "entity.name.class",
+            "foreground": "var(lime)",
+            "font_style": "bold",
+        },*/
+        {
+            "scope": "entity.name.type, support.type, entity.name.class, entity.other.inherited-class",
+            "foreground": "var(eggshell)",
+        },
+        // Variable, Member
+        {
+            "scope": "variable.other.member, variable.language, meta.preprocessor.macro.parameters variable.parameter",
+            "foreground": "var(cyan)",
+        },
+        // Constant
+        {
+            "scope": "constant.numeric, constant.other.color",
+            "foreground": "var(red)",
+        },
+        {
+            "scope": "constant.language, support.constant",
+            "foreground": "var(red)",
+            "font_style": "italic",
+        },
+        {
+            "scope": "constant.numeric.suffix",
+            "foreground": "var(violet)",
+        },
+        // Function
+        {
+            "scope": "entity.name.function, variable.function, support.function, entity.name.constant.preprocessor",
+            "foreground": "var(beige)",
+        },
+        // HTML, XML
+        {
+            "scope": "keyword.declaration.doctype, meta.tag.sgml.doctype storage.type.external-content",
+            "foreground": "var(aqua)",
+            "font_style": "regular",
+        },
+        // CSS
+        {
+            "scope": "entity.other.attribute-name",
+            "foreground": "var(pink)",
+        },
+        {
+            "scope": "support.type.property-name",
+            "foreground": "var(white)",
+        }
+    ]
+}
