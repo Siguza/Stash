@@ -95,6 +95,10 @@
             "scope": "comment",
             "foreground": "var(moss)",
         },
+        /*{
+            "scope": "comment.todo",
+            "foreground": "var(lime)",
+        },*/
         // String
         {
             "scope": "string",

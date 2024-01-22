@@ -9,6 +9,7 @@
     "rulers": [80],
     "tab_size": 4,
     "word_wrap": true,
+    "detect_indentation": true,
     "translate_tabs_to_spaces": true,
     "dictionary": "Packages/Language - English/en_GB.dic",
     "always_show_minimap_viewport": true,
@@ -48,7 +49,12 @@
     "remember_workspace": true,
     "open_files_in_new_window": "never",
     "create_window_at_startup": true,
-    "use_find_clipboard": true,
+    "use_find_clipboard": false,
     "close_windows_when_empty": true,
     "theme": "auto",
+    "ignored_packages":
+    [
+		"Vintage",
+    ],
+    "index_files": true,
 }

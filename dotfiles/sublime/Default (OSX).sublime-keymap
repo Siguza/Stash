@@ -1,4 +1,6 @@
 [
-    { "keys": ["ctrl+tab"], "command": "next_os_tab" },
-    { "keys": ["ctrl+shift+tab"], "command": "prev_os_tab" },
+    { "keys": ["ctrl+tab"], "command": "next_view" },
+    { "keys": ["ctrl+shift+tab"], "command": "prev_view" },
+    { "keys": ["super+v"], "command": "paste_and_indent" },
+    { "keys": ["super+shift+v"], "command": "paste" },
 ]
