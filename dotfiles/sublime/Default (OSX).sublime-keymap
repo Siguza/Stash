@@ -3,4 +3,5 @@
     { "keys": ["ctrl+shift+tab"], "command": "prev_view" },
     { "keys": ["super+v"], "command": "paste_and_indent" },
     { "keys": ["super+shift+v"], "command": "paste" },
+    { "keys": ["super+f"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
 ]
