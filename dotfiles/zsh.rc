@@ -24,6 +24,7 @@ ls-()
 }
 
 # Aliases for common commands
+alias cleantar='bsdtar --uid 0 --gid 0 --uname root --gname wheel --no-acls --no-fflags --no-xattrs --exclude .DS_Store';
 alias asn1dump='openssl asn1parse -i -inform DER -in';
 mkcd()
 {

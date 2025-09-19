@@ -1,0 +1,3 @@
+{
+    "enabled_parsers": ["markdown", "github"]
+}
